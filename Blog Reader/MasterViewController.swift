@@ -48,7 +48,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                         
                         var results = context.executeFetchRequest(request, error: nil)!
                         
-                        // Cycle through the data and delete them one by one
+                        // Cycle through the existing stored data and delete them one by one
                         if results.count > 0 {
                             for result in results {
                             
@@ -60,15 +60,19 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                         
                         // Add any new items that have a title and content
                         for item in items {
+                            //println(item)
                             
                             if let title = item["title"] as? String {
                             
                                 if let content = item["content"] as? String {
                                     
+                                    let published = item["published"] as? String
+                                    
                                     var newPost:NSManagedObject = NSEntityDescription.insertNewObjectForEntityForName("Posts", inManagedObjectContext: context) as! NSManagedObject
                                     
                                     newPost.setValue(title, forKey: "title")
                                     newPost.setValue(content, forKey: "content")
+                                    newPost.setValue(published, forKey: "published")
                                     
                                     context.save(nil)
                                     
@@ -145,7 +149,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         fetchRequest.fetchBatchSize = 20
         
         // Edit the sort key as appropriate.
-        let sortDescriptor = NSSortDescriptor(key: "title", ascending: false)
+        let sortDescriptor = NSSortDescriptor(key: "published", ascending: false)
         let sortDescriptors = [sortDescriptor]
         
         fetchRequest.sortDescriptors = [sortDescriptor]

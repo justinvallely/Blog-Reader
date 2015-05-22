@@ -90,6 +90,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Blog Post" id="cra-N8-TIN"/>
                     <connections>
+                        <outlet property="blogTitle" destination="cra-N8-TIN" id="3zZ-em-yvD"/>
                         <outlet property="webview" destination="oLb-EH-eG0" id="ZQ7-hU-qJC"/>
                     </connections>
                 </viewController>

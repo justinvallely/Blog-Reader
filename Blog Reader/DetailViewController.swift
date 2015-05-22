@@ -11,6 +11,7 @@ import UIKit
 class DetailViewController: UIViewController {
 
     @IBOutlet var webview: UIWebView!
+    @IBOutlet var blogTitle: UINavigationItem!
     
     var detailItem: AnyObject? {
         didSet {
@@ -36,6 +37,9 @@ class DetailViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         self.configureView()
+        
+        // Set the navigation bar title to the name of the blog post
+        self.blogTitle.title = self.detailItem!.valueForKey("title") as? String
     }
 
     override func didReceiveMemoryWarning() {
